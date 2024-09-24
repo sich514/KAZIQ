@@ -89,6 +89,7 @@ const Welcome = styled.div`
   & > div {
     padding: 0px;
     filter: drop-shadow(0 4px 3px rgba(0,0,0,.07)) drop-shadow(0 2px 2px rgba(0,0,0,.06));
+    text-align: center; /* Выравнивание текста по центру */
   }
 
   @media (min-width: 800px) {
@@ -99,6 +100,12 @@ const Welcome = styled.div`
       padding: 40px;
     }
   }
+`
+
+const Title = styled.h1`
+  font-size: 2.5rem; /* Размер шрифта */
+  font-weight: bold; /* Жирный шрифт */
+  margin: 0; /* Убираем отступы */
 `
 
 export function WelcomeBanner() {
@@ -115,7 +122,7 @@ export function WelcomeBanner() {
   return (
     <Welcome>
       <div>
-        <h1>Welcome to Gamba v2 👋</h1>
+        <Title>WELCOME TO 888 . BUY . PLAY . WIN</Title>
         <p>
           A fair, simple and decentralized casino on Solana.
         </p>
