@@ -8,13 +8,13 @@ const Buttons = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-end; /* Выравниваем кнопки по правой стороне */
+  align-items: flex-end;
   gap: 10px;
-  padding-right: 20px; /* Добавляем отступ справа */
+  padding-right: 20px;
 
   & > button {
     border: none;
-    width: 200px; /* Фиксированная ширина кнопок для более аккуратного вида */
+    width: 200px;
     border-radius: 10px;
     padding: 10px;
     background: #ffffffdf;
@@ -35,14 +35,14 @@ const Welcome = styled.div`
   border-radius: 10px;
   position: relative;
   display: grid;
-  grid-template-columns: 2fr 1fr; /* Две колонки: текст слева, кнопки справа */
-  height: 350px; /* Высота баннера */
-  align-items: center; /* Центрируем элементы по вертикали */
+  grid-template-columns: 2fr 1fr;
+  height: 350px;
+  align-items: center;
   padding: 20px;
   filter: drop-shadow(0 4px 3px rgba(0, 0, 0, .07)) drop-shadow(0 2px 2px rgba(0, 0, 0, .06));
 
   @media (max-width: 800px) {
-    grid-template-columns: 1fr; /* В мобильной версии колонки складываются друг над другом */
+    grid-template-columns: 1fr;
     justify-content: center;
   }
 `;
@@ -51,7 +51,13 @@ const Title = styled.h1`
   font-size: 2.5rem;
   font-weight: bold;
   margin: 0;
-  color: white; /* Цвет заголовка для лучшего контраста */
+  color: white;
+  text-shadow: 0px 0px 5px #ff69b4, 0px 0px 10px #ff69b4; /* Розовая обводка */
+`;
+
+const Subtitle = styled.p`
+  color: white;
+  text-shadow: 0px 0px 5px #ff69b4, 0px 0px 10px #ff69b4; /* Розовая обводка */
 `;
 
 export function WelcomeBanner() {
@@ -70,9 +76,9 @@ export function WelcomeBanner() {
     <Welcome>
       <div>
         <Title>WELCOME TO 888 . BUY . PLAY . WIN</Title>
-        <p style={{ color: 'white' }}>
+        <Subtitle>
           A fair, simple and decentralized casino on Solana.
-        </p>
+        </Subtitle>
       </div>
       <Buttons>
         <button onClick={copyInvite}>
