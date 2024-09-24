@@ -39,19 +39,33 @@ const Buttons = styled.div`
   }
 `;
 
-const Banner = styled.div`
+const Welcome = styled.div`
+  background-image: url('/banner.png');
+  background-size: cover;
+  background-position: center;
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
   padding: 20px;
+  height: 100%;
+  filter: drop-shadow(0 4px 3px rgba(0,0,0,.07)) drop-shadow(0 2px 2px rgba(0,0,0,.06));
+
+  @media (min-width: 800px) {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    padding: 0;
+  }
 `;
 
 export function WelcomeBanner() {
   const wallet = useWallet();
   const walletModal = useWalletModal();
   const store = useUserStore();
-  
+
   const copyInvite = () => {
     store.set({ userModal: true });
     if (!wallet.connected) {
@@ -60,8 +74,7 @@ export function WelcomeBanner() {
   };
 
   return (
-    <Banner>
-      <img src="/banner.png" alt="Banner" style={{ width: '100%', height: 'auto' }} />
+    <Welcome>
       <Buttons>
         <button onClick={copyInvite}>
           💸 Copy Invite
@@ -73,6 +86,6 @@ export function WelcomeBanner() {
           💬 Discord
         </button>
       </Buttons>
-    </Banner>
+    </Welcome>
   );
 }
