@@ -75,7 +75,7 @@ export function WelcomeBanner() {
   return (
     <Welcome>
       <div>
-        <Title>WELCOME TO 888 . BUY . PLAY . WIN</Title>
+        <Title>GATCHIMUTCHI CASINO. BUY . PLAY . WIN</Title>
         <Subtitle>
           A fair, simple and decentralized casino on Solana.
         </Subtitle>
