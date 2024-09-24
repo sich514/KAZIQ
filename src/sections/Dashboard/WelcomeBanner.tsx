@@ -51,7 +51,7 @@ const Welcome = styled.div`
   justify-content: center;
   flex-direction: column;
   padding: 20px;
-  height: 500px; /* Увеличиваем высоту баннера */
+  height: 350px; /* Увеличиваем высоту баннера */
   filter: drop-shadow(0 4px 3px rgba(0,0,0,.07)) drop-shadow(0 2px 2px rgba(0,0,0,.06));
 
   @media (min-width: 800px) {
