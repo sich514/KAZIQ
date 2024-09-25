@@ -10,7 +10,7 @@ const RightText = styled.div`
   text-align: right;
   padding-right: 20px;
   line-height: 1.5;
-  text-shadow: 0px 0px 5px #ff69b4, 0px 0px 10px #ff69b4; /* Розовая обводка */
+  text-shadow: 0px 0px 5px #000000, 0px 0px 10px #000000; /* Черная обводка */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -41,12 +41,12 @@ const Title = styled.h1`
   font-weight: bold;
   margin: 0;
   color: white;
-  -webkit-text-stroke: 1px black; /* Чёрная обводка */
+  text-shadow: 0px 0px 5px #000000, 0px 0px 10px #000000; /* Черная обводка */
 `;
 
 const Subtitle = styled.p`
   color: white;
-  -webkit-text-stroke: 1px black; /* Чёрная обводка */
+  text-shadow: 0px 0px 5px #000000, 0px 0px 10px #000000; /* Черная обводка */
 `;
 
 export function WelcomeBanner() {
