@@ -10,11 +10,21 @@ const RightText = styled.div`
   text-align: right;
   padding-right: 20px;
   line-height: 1.5;
-  text-shadow: 0px 0px 5px #000000, 0px 0px 10px #000000; /* Черная обводка */
+  text-shadow: 0px 0px 5px #000000, 0px 0px 10px #000000; /* Black outline */
   display: flex;
   flex-direction: column;
   justify-content: center;
   height: 100%;
+
+  @media (max-width: 800px) {
+    text-align: center;
+    padding-right: 0;
+    font-size: 1.2rem;
+  }
+
+  @media (max-width: 500px) {
+    font-size: 1rem;
+  }
 `;
 
 const Welcome = styled.div`
@@ -34,6 +44,11 @@ const Welcome = styled.div`
     justify-content: center;
     padding-right: 0;
   }
+
+  @media (max-width: 500px) {
+    height: 250px;
+    padding: 10px;
+  }
 `;
 
 const Title = styled.h1`
@@ -41,12 +56,29 @@ const Title = styled.h1`
   font-weight: bold;
   margin: 0;
   color: white;
-  text-shadow: 0px 0px 5px #000000, 0px 0px 10px #000000; /* Черная обводка */
+  text-shadow: 0px 0px 5px #000000, 0px 0px 10px #000000; /* Black outline */
+
+  @media (max-width: 800px) {
+    font-size: 2rem;
+    text-align: center;
+  }
+
+  @media (max-width: 500px) {
+    font-size: 1.5rem;
+  }
 `;
 
 const Subtitle = styled.p`
   color: white;
-  text-shadow: 0px 0px 5px #000000, 0px 0px 10px #000000; /* Черная обводка */
+  text-shadow: 0px 0px 5px #000000, 0px 0px 10px #000000; /* Black outline */
+
+  @media (max-width: 800px) {
+    text-align: center;
+  }
+
+  @media (max-width: 500px) {
+    font-size: 0.9rem;
+  }
 `;
 
 export function WelcomeBanner() {
