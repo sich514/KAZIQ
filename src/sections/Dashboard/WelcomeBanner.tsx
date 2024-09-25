@@ -55,9 +55,10 @@ export function WelcomeBanner() {
   const store = useUserStore();
 
   return (
+    
     <Welcome>
       <RightText>
-        <Title>WELCOME TO 888 . BUY . PLAY . WIN</Title>
+        <Title>WTAMAGUTCHI CASINO.<br /> BUY . PLAY . WIN</Title>
         <Subtitle>
           A fair, simple and decentralized casino on Solana.
         </Subtitle>
