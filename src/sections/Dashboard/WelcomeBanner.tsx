@@ -59,7 +59,7 @@ export function WelcomeBanner() {
       <RightText>
         <Title>TAMAGUTCHI CASINO.<br /> BUY. PLAY. WIN!</Title>
         <Subtitle>
-          A simple and decentralized casino<br />for degen on Solana.
+          A simple and decentralized casino<br />for degens on Solana.
         </Subtitle>
       </RightText>
     </Welcome>
