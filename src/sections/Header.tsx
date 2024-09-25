@@ -30,7 +30,7 @@ const BuyButton = styled.a`
   border-radius: 10px;
   background: #03ffa4;
   padding: 2px 10px;
-  font-size: 18px;
+  font-size: 12px;
   text-transform: uppercase;
   font-weight: bold;
   transition: background-color .2s;
@@ -122,7 +122,7 @@ export default function Header() {
             </Bonus>
           )}
           <BuyButton href="https://pump.fun" target="_blank" rel="noopener noreferrer">
-            Buy $GUTCHI
+            Buy $GUCHI
           </BuyButton>
           <TokenSelect />
           <UserButton />
