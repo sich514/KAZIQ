@@ -7,7 +7,7 @@ import { PLATFORM_JACKPOT_FEE } from '../constants'
 import TokenSelect from './TokenSelect'
 import { UserButton } from './UserButton'
 
-const Bonus = styled.button`
+const Bonus = styled.button
   all: unset;
   cursor: pointer;
   color: #003c00;
@@ -21,25 +21,9 @@ const Bonus = styled.button`
   &:hover {
     background: white;
   }
-`
 
-const BuyButton = styled.a`
-  all: unset;
-  cursor: pointer;
-  color: #003c00;
-  border-radius: 10px;
-  background: #03ffa4;
-  padding: 2px 10px;
-  font-size: 12px;
-  text-transform: uppercase;
-  font-weight: bold;
-  transition: background-color .2s;
-  &:hover {
-    background: white;
-  }
-`
 
-const StyledHeader = styled.div`
+const StyledHeader = styled.div
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -53,15 +37,15 @@ const StyledHeader = styled.div`
   left: 0;
   z-index: 1000;
   backdrop-filter: blur(20px);
-`
 
-const Logo = styled(NavLink)`
+
+const Logo = styled(NavLink)
   height: 35px;
   margin: 0 10px;
   & > img {
     height: 100%;
   }
-`
+
 
 export default function Header() {
   const pool = useCurrentPool()
@@ -121,9 +105,6 @@ export default function Header() {
               ✨ <TokenValue amount={balance.bonusBalance} />
             </Bonus>
           )}
-          <BuyButton href="https://pump.fun" target="_blank" rel="noopener noreferrer">
-            Buy $GUCHI
-          </BuyButton>
           <TokenSelect />
           <UserButton />
         </div>
