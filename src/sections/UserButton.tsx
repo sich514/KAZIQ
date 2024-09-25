@@ -1,108 +1,133 @@
-import { useWallet } from '@solana/wallet-adapter-react'
-import { useWalletModal } from '@solana/wallet-adapter-react-ui'
-import { GambaUi, useReferral } from 'gamba-react-ui-v2'
-import React, { useState } from 'react'
+import { GambaUi, TokenValue, useCurrentPool, useGambaPlatformContext, useUserBalance } from 'gamba-react-ui-v2'
+import React from 'react'
+import { NavLink } from 'react-router-dom'
+import styled from 'styled-components'
 import { Modal } from '../components/Modal'
-import { PLATFORM_ALLOW_REFERRER_REMOVAL, PLATFORM_REFERRAL_FEE } from '../constants'
-import { useToast } from '../hooks/useToast'
-import { useUserStore } from '../hooks/useUserStore'
-import { truncateString } from '../utils'
+import { PLATFORM_JACKPOT_FEE } from '../constants'
+import TokenSelect from './TokenSelect'
+import { UserButton } from './UserButton'
 
-function UserModal() {
-  const user = useUserStore()
-  const wallet = useWallet()
-  const toast = useToast()
-  const walletModal = useWalletModal()
-  const referral = useReferral()
-  const [removing, setRemoving] = useState(false)
-
-  const copyInvite = () => {
-    try {
-      referral.copyLinkToClipboard()
-      toast({
-        title: '📋 Copied to clipboard',
-        description: 'Your referral code has been copied!',
-      })
-    } catch {
-      walletModal.setVisible(true)
-    }
+const Bonus = styled.button`
+  all: unset;
+  cursor: pointer;
+  color: #003c00;
+  border-radius: 10px;
+  background: #03ffa4;
+  padding: 10px 15px;  /* Увеличенный padding для высоты */
+  font-size: 12px;
+  text-transform: uppercase;
+  font-weight: bold;
+  transition: background-color .2s;
+  &:hover {
+    background: white;
   }
+`
 
-  const revokeInvite = async () => {
-    try {
-      setRemoving(true)
-      await referral.removeReferral()
-    } finally {
-      setRemoving(false)
-    }
+const BuyButton = styled.a`
+  all: unset;
+  cursor: pointer;
+  color: #003c00;
+  border-radius: 10px;
+  background: #03ffa4;
+  padding: 10px 15px; /* Увеличенный padding для высоты */
+  font-size: 12px;
+  text-transform: uppercase;
+  font-weight: bold;
+  transition: background-color .2s;
+  &:hover {
+    background: white;
   }
+`
 
-  return (
-    <Modal onClose={() => user.set({ userModal: false })}>
-      <h1>
-        {truncateString(wallet.publicKey?.toString() ?? '', 6, 3)}
-      </h1>
-      <div style={{ display: 'flex', gap: '20px', flexDirection: 'column', width: '100%', padding: '0 20px' }}>
-        <div style={{ display: 'flex', gap: '10px', flexDirection: 'column', width: '100%' }}>
-          <GambaUi.Button main onClick={copyInvite}>
-            💸 Copy invite link
-          </GambaUi.Button>
-          <div style={{ opacity: '.8', fontSize: '80%' }}>
-            Share your link with new users to earn {(PLATFORM_REFERRAL_FEE * 100)}% every time they play on this platform.
-          </div>
-        </div>
-        {PLATFORM_ALLOW_REFERRER_REMOVAL && referral.recipient && (
-          <div style={{ display: 'flex', gap: '10px', flexDirection: 'column', width: '100%' }}>
-            <GambaUi.Button disabled={removing} onClick={revokeInvite}>
-              Revoke invite
-            </GambaUi.Button>
-            <div style={{ opacity: '.8', fontSize: '80%' }}>
-              You were invited by <a target="_blank" href={`https://solscan.io/account/${referral.recipient.toString()}`} rel="noreferrer">{referral.recipient.toString()}</a>
-            </div>
-          </div>
-        )}
-        <GambaUi.Button onClick={() => wallet.disconnect()}>
-          Disconnect
-        </GambaUi.Button>
-      </div>
-    </Modal>
-  )
-}
+const StyledHeader = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px;
+  background: rgba(33, 34, 51, 0.9);
+  position: fixed;
+  background: #000000CC;
+  backdrop-filter: blur(20px);
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  backdrop-filter: blur(20px);
+`
 
-export function UserButton() {
-  const walletModal = useWalletModal()
-  const wallet = useWallet()
-  const user = useUserStore()
-
-  const connect = () => {
-    if (wallet.wallet) {
-      wallet.connect()
-    } else {
-      walletModal.setVisible(true)
-    }
+const Logo = styled(NavLink)`
+  height: 35px;
+  margin: 0 10px;
+  & > img {
+    height: 100%;
   }
+`
+
+export default function Header() {
+  const pool = useCurrentPool()
+  const context = useGambaPlatformContext()
+  const balance = useUserBalance()
+  const [bonusHelp, setBonusHelp] = React.useState(false)
+  const [jackpotHelp, setJackpotHelp] = React.useState(false)
 
   return (
     <>
-      {wallet.connected && user.userModal && (
-        <UserModal />
+      {bonusHelp && (
+        <Modal onClose={() => setBonusHelp(false)}>
+          <h1>Bonus ✨</h1>
+          <p>
+            You have <b><TokenValue amount={balance.bonusBalance} /></b> worth of free plays. This bonus will be applied automatically when you play.
+          </p>
+          <p>
+            Note that a fee is still needed from your wallet for each play.
+          </p>
+        </Modal>
       )}
-      {wallet.connected ? (
-        <div style={{ position: 'relative' }}>
-          <GambaUi.Button
-            onClick={() => user.set({ userModal: true })}
-          >
-            <div style={{ display: 'flex', gap: '.5em', alignItems: 'center' }}>
-              <img src={wallet.wallet?.adapter.icon} height="20px" />
-              {truncateString(wallet.publicKey?.toBase58(), 3)}
-            </div>
-          </GambaUi.Button>
+      {jackpotHelp && (
+        <Modal onClose={() => setJackpotHelp(false)}>
+          <h1>Jackpot 💰</h1>
+          <p style={{ fontWeight: 'bold' }}>
+            There{'\''}s <TokenValue amount={pool.jackpotBalance} /> in the Jackpot.
+          </p>
+          <p>
+            The Jackpot is a prize pool that grows with every bet made. As the Jackpot grows, so does your chance of winning. Once a winner is selected, the value of the Jackpot resets and grows from there until a new winner is selected.
+          </p>
+          <p>
+            You will be paying a maximum of {(PLATFORM_JACKPOT_FEE * 100).toLocaleString(undefined, { maximumFractionDigits: 4 })}% for each wager for a chance to win.
+          </p>
+          <label style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+            {context.defaultJackpotFee === 0 ? 'DISABLED' : 'ENABLED'}
+            <GambaUi.Switch
+              checked={context.defaultJackpotFee > 0}
+              onChange={(checked) => context.setDefaultJackpotFee(checked ? PLATFORM_JACKPOT_FEE : 0)}
+            />
+          </label>
+        </Modal>
+      )}
+      <StyledHeader>
+        <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
+          <Logo to="/">
+            <img alt="Gamba logo" src="/logo.svg" />
+          </Logo>
         </div>
-      ) : (
-        <GambaUi.Button onClick={connect}>
-          {wallet.connecting ? 'Connecting' : 'Connect'}
-        </GambaUi.Button>
-      )}
+        <div style={{ display: 'flex', gap: '10px', alignItems: 'center', position: 'relative' }}>
+          {pool.jackpotBalance > 0 && (
+            <Bonus onClick={() => setJackpotHelp(true)}>
+              💰 <TokenValue amount={pool.jackpotBalance} />
+            </Bonus>
+          )}
+          {balance.bonusBalance > 0 && (
+            <Bonus onClick={() => setBonusHelp(true)}>
+              ✨ <TokenValue amount={balance.bonusBalance} />
+            </Bonus>
+          )}
+          <BuyButton href="https://pump.fun" target="_blank" rel="noopener noreferrer">
+            Buy $GUCHI
+          </BuyButton>
+          <TokenSelect />
+          <UserButton />
+        </div>
+      </StyledHeader>
     </>
   )
 }
