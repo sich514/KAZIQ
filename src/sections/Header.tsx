@@ -30,7 +30,7 @@ const BuyButton = styled.a`
   border-radius: 10px;
   background: #03ffa4;
   padding: 2px 10px;
-  font-size: 12px;
+  font-size: 18px;
   text-transform: uppercase;
   font-weight: bold;
   transition: background-color .2s;
