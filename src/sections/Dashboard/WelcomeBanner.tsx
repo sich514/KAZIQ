@@ -41,12 +41,12 @@ const Title = styled.h1`
   font-weight: bold;
   margin: 0;
   color: white;
-  text-shadow: 0px 0px 5px #ff69b4, 0px 0px 10px #ff69b4; /* Розовая обводка */
+  -webkit-text-stroke: 1px black; /* Чёрная обводка */
 `;
 
 const Subtitle = styled.p`
   color: white;
-  text-shadow: 0px 0px 5px #ff69b4, 0px 0px 10px #ff69b4; /* Розовая обводка */
+  -webkit-text-stroke: 1px black; /* Чёрная обводка */
 `;
 
 export function WelcomeBanner() {
@@ -55,7 +55,6 @@ export function WelcomeBanner() {
   const store = useUserStore();
 
   return (
-    
     <Welcome>
       <RightText>
         <Title>TAMAGUTCHI CASINO.<br /> BUY. PLAY. WIN!</Title>
