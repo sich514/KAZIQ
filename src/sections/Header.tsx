@@ -23,6 +23,22 @@ const Bonus = styled.button`
   }
 `
 
+const BuyButton = styled.a`
+  all: unset;
+  cursor: pointer;
+  color: #003c00;
+  border-radius: 10px;
+  background: #03ffa4;
+  padding: 2px 10px;
+  font-size: 12px;
+  text-transform: uppercase;
+  font-weight: bold;
+  transition: background-color .2s;
+  &:hover {
+    background: white;
+  }
+`
+
 const StyledHeader = styled.div`
   display: flex;
   align-items: center;
@@ -105,6 +121,9 @@ export default function Header() {
               ✨ <TokenValue amount={balance.bonusBalance} />
             </Bonus>
           )}
+          <BuyButton href="https://pump.fun" target="_blank" rel="noopener noreferrer">
+            Buy $GUTCHI
+          </BuyButton>
           <TokenSelect />
           <UserButton />
         </div>
