@@ -4,28 +4,13 @@ import React from 'react';
 import styled from 'styled-components';
 import { useUserStore } from '../../hooks/useUserStore';
 
-const Buttons = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-end;
-  gap: 10px;
+const RightText = styled.div`
+  color: white;
+  font-size: 1.2rem;
+  text-align: right;
   padding-right: 20px;
-
-  & > button {
-    border: none;
-    width: 200px;
-    border-radius: 10px;
-    padding: 10px;
-    background: #ffffffdf;
-    transition: background-color .2s ease;
-    color: black;
-    cursor: pointer;
-
-    &:hover {
-      background: white;
-    }
-  }
+  line-height: 1.5;
+  text-shadow: 0px 0px 5px #ff69b4, 0px 0px 10px #ff69b4; /* Розовая обводка */
 `;
 
 const Welcome = styled.div`
@@ -65,32 +50,18 @@ export function WelcomeBanner() {
   const walletModal = useWalletModal();
   const store = useUserStore();
 
-  const copyInvite = () => {
-    store.set({ userModal: true });
-    if (!wallet.connected) {
-      walletModal.setVisible(true);
-    }
-  };
-
   return (
     <Welcome>
       <div>
-        <Title>GATCHIMUTCHI CASINO. BUY . PLAY . WIN</Title>
+        <Title>WELCOME TO 888 . BUY . PLAY . WIN</Title>
         <Subtitle>
           A fair, simple and decentralized casino on Solana.
         </Subtitle>
       </div>
-      <Buttons>
-        <button onClick={copyInvite}>
-          💸 Copy Invite
-        </button>
-        <button onClick={() => window.open('https://v2.gamba.so/', '_blank')}>
-          🚀 Add Liquidity
-        </button>
-        <button onClick={() => window.open('https://discord.gg/HSTtFFwR', '_blank')}>
-          💬 Discord
-        </button>
-      </Buttons>
+      <RightText>
+        Fair play. High rewards.<br />
+        Start your adventure today!
+      </RightText>
     </Welcome>
   );
 }
