@@ -6,11 +6,15 @@ import { useUserStore } from '../../hooks/useUserStore';
 
 const RightText = styled.div`
   color: white;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   text-align: right;
   padding-right: 20px;
   line-height: 1.5;
   text-shadow: 0px 0px 5px #ff69b4, 0px 0px 10px #ff69b4; /* Розовая обводка */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
 `;
 
 const Welcome = styled.div`
@@ -19,16 +23,16 @@ const Welcome = styled.div`
   background-position: center;
   border-radius: 10px;
   position: relative;
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  height: 350px;
+  display: flex;
+  justify-content: flex-end;
   align-items: center;
+  height: 350px;
   padding: 20px;
   filter: drop-shadow(0 4px 3px rgba(0, 0, 0, .07)) drop-shadow(0 2px 2px rgba(0, 0, 0, .06));
 
   @media (max-width: 800px) {
-    grid-template-columns: 1fr;
     justify-content: center;
+    padding-right: 0;
   }
 `;
 
@@ -52,15 +56,11 @@ export function WelcomeBanner() {
 
   return (
     <Welcome>
-      <div>
+      <RightText>
         <Title>WELCOME TO 888 . BUY . PLAY . WIN</Title>
         <Subtitle>
           A fair, simple and decentralized casino on Solana.
         </Subtitle>
-      </div>
-      <RightText>
-        Fair play. High rewards.<br />
-        Start your adventure today!
       </RightText>
     </Welcome>
   );
