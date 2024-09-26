@@ -122,7 +122,7 @@ export default function Header() {
             </Bonus>
           )}
           <BuyButton href="https://pump.fun" target="_blank" rel="noopener noreferrer">
-            Buy $GUCHI
+            Buy $KIM
           </BuyButton>
           <TokenSelect />
           <UserButton />
